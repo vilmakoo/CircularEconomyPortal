@@ -1,0 +1,6 @@
+@CircularPortal.API_HostAddress = http://localhost:5232
+
+GET {{CircularPortal.API_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
