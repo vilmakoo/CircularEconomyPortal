@@ -6,7 +6,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 // 1. Add Database Service (SQLite)
 builder.Services.AddDbContext<AppDbContext>(options =>
-    options.UseSqlite("Data Source=app.db"));
+    options.UseSqlite("Data Source=/app/app.db"));
 
 // 2. Add CORS (Allow Frontend to access Backend)
 builder.Services.AddCors(options =>

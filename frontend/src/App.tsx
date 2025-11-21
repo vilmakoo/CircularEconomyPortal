@@ -3,10 +3,47 @@ import {
   Container, Typography, Box, Card, CardContent, 
   TextField, Button, Grid, Tab, Tabs, Snackbar, Alert 
 } from '@mui/material';
-import { 
-  getWasteBins, getUser, updateUser, sendFeedback, 
-  type WasteBin, type User 
-} from './api';
+
+import axios from 'axios';
+
+const API_URL = 'http://localhost:5232'; 
+
+export interface WasteBin {
+  id: number;
+  address: string;
+  emptyingSchedule: string;
+  lastEmptiedAt: string;
+  userId: number;
+}
+
+export interface User {
+  id: number;
+  name: string;
+  email: string;
+  phone: string;
+}
+
+// Helper to get waste bins
+export const getWasteBins = async () => {
+  const response = await axios.get<WasteBin[]>(`${API_URL}/wastebins`);
+  return response.data;
+};
+
+// Helper to get user details
+export const getUser = async () => {
+  const response = await axios.get<User>(`${API_URL}/users`);
+  return response.data;
+};
+
+// Helper to update user
+export const updateUser = async (user: User) => {
+  await axios.put(`${API_URL}/users`, user);
+};
+
+// Helper to send feedback
+export const sendFeedback = async (message: string) => {
+  await axios.post(`${API_URL}/feedback`, { message });
+};
 
 function App() {
   const [tabIndex, setTabIndex] = useState(0);
@@ -60,7 +97,7 @@ function App() {
       {tabIndex === 0 && (
         <Grid container spacing={2}>
           {bins.map((bin) => (
-            <Grid item xs={12} md={6} key={bin.id}>
+            <Grid size={{ xs: 12, md: 6 }} key={bin.id}>
               <Card variant="outlined">
                 <CardContent>
                   <Typography variant="h6">📍 {bin.address}</Typography>
