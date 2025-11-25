@@ -13,7 +13,7 @@ namespace CircularPortal.API.Data
 
         [Required]
         [MaxLength(500)]
-        public string Message { get; set; } = string.Empty; 
+        public string Message { get; set; } = string.Empty;
 
         // Timestamp for when the feedback was created
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
