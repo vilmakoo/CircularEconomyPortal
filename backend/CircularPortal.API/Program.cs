@@ -8,7 +8,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlite("Data Source=/app/app.db"));
 
-// 2. Add CORS (Allow Frontend to access Backend)
+// 2. Add CORS
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowReactApp",
@@ -17,6 +17,7 @@ builder.Services.AddCors(options =>
                         .AllowAnyHeader());
 });
 builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<IFeedbackService, FeedbackService>();
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();

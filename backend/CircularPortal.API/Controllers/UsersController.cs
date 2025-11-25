@@ -19,9 +19,9 @@ public class UsersController : ControllerBase
     [HttpPut]
     public async Task<IActionResult> UpdateUser(User user)
     {
-        // Force ID to 1 for simulation (business logic remains here)
-        user.Id = 1; 
-        
+        // Force ID to 1 for simulation
+        user.Id = 1;
+
         await _userService.UpdateUserAsync(user);
         return NoContent();
     }
